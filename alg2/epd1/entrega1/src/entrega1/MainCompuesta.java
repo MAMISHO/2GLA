@@ -1,7 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Este ejercicion lo implementamos con la ADT arraList
+recibimos dos listas, y hacemos un primer filtro, en el que compriobamos 
+que la segunda lista tenga como tamaño la mistad de la primera, ya que si
+no lo tiene quiere decir que no se cumpliria el palindromo.
+
+Luego de pasar el filtro vamos iterando(desl final al principio) sobre la segunda lista y 
+comparamos sus lementos de la siguiente forma.
+
+L1 {1,2,3,4,5,5,4,3,2,1}
+L2 {1,2,3,4,5}
+tomamos el ultimo elemento de la lista 2 y comparamos con los elementos 
+de la mistad de la lista 1, es decir tamañoLista/2 y tamañoLista/2+1
+luego implementamos una variable comodin que nos permite 
+ir tanto a la izquierad como a laderecha en cada ieracion en la lista 2
+de esta forma si 
+no se cumple que un elemento de la lista 2 no es igual alos dos correspondientes 
+en la lista 1, el programa devuelve false, y si termina todo el rrecorrido, 
+se devuelve true ya que todos cumplieronn la igualdad.
+
+esto cumple con O(n) ya que solo hacemos un bucle y su complejidad es lineal.
+
  */
 
 package entrega1;
@@ -10,10 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author MAMISHO
+ * Autores: Edwin Mauricio Quishpe Maldonado
+ *          Grabriel Valenzuela
  */
-public class Entrega1 {
+public class MainCompuesta {
 
     /**
      * @param args the command line arguments
@@ -66,6 +84,8 @@ public class Entrega1 {
         System.out.println("Comprobamos");
         
         Compuesta c=new Compuesta(l1, l2);
+        
+        
         if(c.comprobar()){
             System.out.println("SI, esta compuesta");
         }else{
