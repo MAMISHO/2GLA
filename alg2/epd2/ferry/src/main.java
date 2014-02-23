@@ -18,6 +18,7 @@ public class main {
         //f.imprime();
         f.rellerferry();
         f.imprimeFerry();
+        f.imprime();
     }
     
 }

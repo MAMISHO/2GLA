@@ -44,10 +44,22 @@ public class Ferry {
    
     public void rellerferry(){
         ArrayQueue ferry= new ArrayQueue();
+        
         while(ferry.size()<220){
             //aqui hay que sacar una fila de coches, y luego meterlas en una cola auxiliar, luego meterla y controlar tamaños.
             //por eso esta implementación falla, arreglar.
-            ferry.enqueue(parking.dequeue().dequeue());
+            boolean limite=false;
+            //System.out.println(parking.size());
+            ArrayQueue aux=new ArrayQueue();
+            aux=parking.dequeue();
+            while(aux.size()>0 && !limite){
+                
+                ferry.enqueue(aux.dequeue());
+                if(ferry.size()==219){
+                    limite=true;
+                }
+            }
+            System.out.println(ferry.size());
         }
         ferries.enqueue(ferry);
     }
@@ -58,7 +70,7 @@ public class Ferry {
         while(parking.size()>0){
             ArrayQueue colaAux=new ArrayQueue();
             colaAux=parking.dequeue();
-            System.out.println("Se a desencolado la cola "+cont);
+            System.out.println("Se ha desencolado la cola "+cont);
             while(colaAux.size()>0){
                 System.out.println(colaAux.dequeue());
             }
