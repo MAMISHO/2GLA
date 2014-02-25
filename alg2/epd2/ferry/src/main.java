@@ -16,6 +16,7 @@ public class main {
     public static void main(String[] args) {
         Ferry f=new Ferry();
         //f.imprime();
+        //f.llenarFerries();
         f.rellerferry();
         f.imprimeFerry();
         f.imprime();

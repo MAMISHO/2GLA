@@ -1,7 +1,8 @@
 
 import queues.ArrayQueue;
 import queues.CircularArrayQueue;
-import queues.QueueADT;
+//import queues.QueueADT;
+import queues.*;
 
 /*
  * La forma en la que hemos planteado este ejerciccio es usando la ADT de la cola circular
@@ -17,8 +18,11 @@ import queues.QueueADT;
 public class Ferry {
     CircularArrayQueue<ArrayQueue> parking;
     ArrayQueue<ArrayQueue> ferries;
+    PriorityQueueLinearNode prueba;
+    
     
     public Ferry(){//El parking inicia lleno.
+        prueba= new PriorityQueueLinearNode();
         parking=new CircularArrayQueue<ArrayQueue>();
         ferries=new ArrayQueue<ArrayQueue>();
         ArrayQueue fila;
@@ -41,11 +45,25 @@ public class Ferry {
         
         
     }
-   
+    
+    public void llenarFerries(){
+        for (int i = 0; i < 1000; i++) {
+            this.rellerferry();
+        }
+        System.out.println("La cola de ferries es: "+ferries.size());
+    }
+    
+    public void completarParking(){
+        ArrayQueue fila;
+        if(ferries.isEmpty()){
+            
+        }
+    }
+    
     public void rellerferry(){
         ArrayQueue ferry= new ArrayQueue();
         
-        while(ferry.size()<220){
+        while(ferry.size()<219){
             //aqui hay que sacar una fila de coches, y luego meterlas en una cola auxiliar, luego meterla y controlar tamaños.
             //por eso esta implementación falla, arreglar.
             boolean limite=false;
@@ -54,13 +72,15 @@ public class Ferry {
             aux=parking.dequeue();
             while(aux.size()>0 && !limite){
                 
-                ferry.enqueue(aux.dequeue());
-                if(ferry.size()==219){
+                
+                if(ferry.size()==218){
                     limite=true;
                 }
+                ferry.enqueue(aux.dequeue());
             }
-            System.out.println(ferry.size());
+            //System.out.println("El ferry tiene coches: "+ferry.size());
         }
+        System.out.println("El ferry tiene coches: "+ferry.size());
         ferries.enqueue(ferry);
     }
     
