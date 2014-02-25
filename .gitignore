@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+/alg2/epd2/ferry_1/nbproject/private/
+/alg2/epd2/ferry_1/build/
+/alg2/epd2/ferry_1/dist/
