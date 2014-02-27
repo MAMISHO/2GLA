@@ -18,7 +18,7 @@ public class main {
         //f.imprime();
         //f.rellenaFerry();
         f.cargarFerries();
-        f.imprimeFerry();
+        //f.imprimeFerry();
         //f.imprime();
     }
     

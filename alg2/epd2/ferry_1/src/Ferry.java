@@ -2,15 +2,11 @@
 import queues.ArrayQueue;
 import jss2.*;
 
-/*
- * La forma en la que hemos planteado este ejerciccio es usando la ADT de la cola circular
- * En la cual vamos a simular el parking en el que esperan los coches. De esta forma ya no 
- * nos preocupamos de controlar el final de las filas de los coches que están esperand,
- * y tambin y con eso nos ahorramos un bucle, lo que se resume en un bucle menos.
- */
 /**
  *
- * @author EDWIN y Gabri
+ * @Autores
+ * Edwin Mauricio Quishpe
+ * Grabriel Valenzuela
  */
 public class Ferry {
 
@@ -35,24 +31,18 @@ public class Ferry {
             for (int j = 1; j <= 40; j++) {
                 fila.enqueue(j);
             }
-//            parking.add(fila);
             parking.add(fila);
-            //parking.set(i, fila);
         }
 
     }
 
     public int rellenaFerry(int poscont) {
         ArrayQueue ferry = new ArrayQueue();
-        //int i = poscont; bucle infinito
+        
         int pos = poscont;
         boolean limite = false;
         while ( !limite) {
-            //aqui hay que sacar una fila de coches, y luego meterlas en una cola auxiliar, luego meterla y controlar tamaños.
-            //por eso esta implementación falla, arreglar.
-            
-            // revisar poscont que significa que es la pos desde donde tenemos que cargar los coches
-            //
+
             while (parking.get(pos).size() > 0 && !limite) {
 
                 ferry.enqueue(parking.get(pos).dequeue());
@@ -91,10 +81,9 @@ public class Ferry {
 
     public void cargarFerries() {
         int poscont = 1;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             int pos = rellenaFerry(poscont);
-            //System.out.println("\nseñal indice cola: "+poscont);
-            poscont = cargarParking(pos);//esto es lo que pasamos para cargar los ferries desde la posission poscont
+            poscont = cargarParking(pos);
         }
         System.out.println("\ntam Ferries: " + ferries.size());
     }
@@ -105,11 +94,8 @@ public class Ferry {
             pos = pos - 1;
             resta=true;
         }
-        if(parking.get(10).isEmpty()){        
+        if(parking.get(10).isEmpty()){//comprobamos si no viene de la ultima fila de coches.
                 cargarFila(10);
-                System.out.println("LLenamos la fila: "+10);
-            
-                System.out.println("la fila "+10+" tiene "+parking.get(10).size()+" coches");
         }
         for (int i = 1; i <= pos; i++) {
             
@@ -144,7 +130,7 @@ public class Ferry {
     public void imprimeFerry() {
         while (ferries.size() > 0) {
             ArrayQueue aux = ferries.dequeue();
-            System.out.println("Feerie desencola\n");
+            System.out.println("Ferie desencola\n");
             while (!aux.isEmpty()) {
                 System.out.println(aux.dequeue());
             }
