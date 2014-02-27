@@ -94,17 +94,12 @@ public class Ferry {
         for (int i = 0; i < 10; i++) {
             int pos = rellenaFerry(poscont);
             //System.out.println("\nseñal indice cola: "+poscont);
-<<<<<<< HEAD
-=======
-            
->>>>>>> FETCH_HEAD
             poscont = cargarParking(pos);//esto es lo que pasamos para cargar los ferries desde la posission poscont
         }
         System.out.println("\ntam Ferries: " + ferries.size());
     }
 
     public int cargarParking(int pos) {
-<<<<<<< HEAD
         boolean resta=false;
         if (!parking.get(pos).isEmpty()){
             pos = pos - 1;
@@ -118,17 +113,6 @@ public class Ferry {
         }
         for (int i = 1; i <= pos; i++) {
             
-=======
-        boolean resta = false;
-        if (!parking.get(pos).isEmpty()) {
-            pos = pos - 1;
-            resta = true;
-        }
-        if (parking.get(10).isEmpty()){
-            cargarFila(10);
-        }
-        for (int i = 1; i <= pos; i++) {
->>>>>>> FETCH_HEAD
             if (parking.get(i).isEmpty()) {
                 cargarFila(i);
                 System.out.println("LLenamos la fila: "+i);
@@ -136,20 +120,12 @@ public class Ferry {
             System.out.println("la fila "+i+" tiene "+parking.get(i).size()+" coches");
         }
         
-<<<<<<< HEAD
         if(resta){
-=======
-        if (resta){
->>>>>>> FETCH_HEAD
             return pos+1;
         }else{
             return pos;
         }
-<<<<<<< HEAD
             
-=======
-        
->>>>>>> FETCH_HEAD
     }
 
     public void cargarFila(int limite) {
