@@ -63,15 +63,16 @@ public class Ferry {
                 }
 
             }
+            System.out.println("\nSeñal indice: " + pos);
+            System.out.println("\nTamaño del ferri" + ferry.size());
             if (parking.get(pos).isEmpty()) {
                 pos++;
             }
-            if (pos == 10) {
+            if (pos > 10) {
                 pos = 1;
             }
 
-            System.out.println("\nSeñal indice: " + pos);
-            System.out.println("\nTamaño del ferri" + ferry.size());
+            
         }
         ferries.enqueue(ferry);
         return pos;
@@ -93,22 +94,33 @@ public class Ferry {
         for (int i = 0; i < 10; i++) {
             int pos = rellenaFerry(poscont);
             //System.out.println("\nseñal indice cola: "+poscont);
-            ;
+            
             poscont = cargarParking(pos);//esto es lo que pasamos para cargar los ferries desde la posission poscont
         }
         System.out.println("\ntam Ferries: " + ferries.size());
     }
 
     public int cargarParking(int pos) {
+        boolean resta = false;
         if (!parking.get(pos).isEmpty()) {
             pos = pos - 1;
+            resta = true;
         }
-        for (int i = 0; i < pos; i++) {
+        if (parking.get(10).isEmpty()){
+            cargarFila(10);
+        }
+        for (int i = 1; i <= pos; i++) {
             if (parking.get(i).isEmpty()) {
                 cargarFila(i);
             }
         }
-        return pos+1;
+        
+        if (resta){
+            return pos+1;
+        }else{
+            return pos;
+        }
+        
     }
 
     public void cargarFila(int limite) {
@@ -118,7 +130,7 @@ public class Ferry {
         } else {
             tam = 40;
         }
-        for (int i = 0; i < tam; i++) {
+        for (int i = 1; i <= tam; i++) {
 
             parking.get(limite).enqueue(i);
         }
