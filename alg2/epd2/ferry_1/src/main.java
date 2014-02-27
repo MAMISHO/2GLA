@@ -16,8 +16,10 @@ public class main {
     public static void main(String[] args) {
         Ferry f=new Ferry();
         //f.imprime();
-        f.rellerferry();
+        //f.rellenaFerry();
+        f.cargarFerries();
         f.imprimeFerry();
+        f.imprime();
     }
     
 }
