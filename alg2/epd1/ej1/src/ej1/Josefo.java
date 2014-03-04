@@ -20,7 +20,7 @@ public class Josefo {
     public Josefo(int numero){
         int i;
         soldados=new DoubleIndexedList();
-        for(i=1;i<=numero;i++){
+        for(i=0;i<numero;i++){
             soldados.add(i);
         }
     }
@@ -36,7 +36,8 @@ public class Josefo {
                 cont=acumulado;
                 acumulado=0;
             }
-            if(cont%saltos==0){
+            if(cont%saltos==0 && cont <=soldados.size()){//revisar
+                System.out.println("cnt: "+cont);
                 System.out.println("remueve "+soldados.get(cont));
                 soldados.remove(cont);
                 acumulado=1;

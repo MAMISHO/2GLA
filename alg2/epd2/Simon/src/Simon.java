@@ -24,23 +24,29 @@ public class Simon {
     Scanner sc;
     
     public Simon(){
+        ArrayList<StackADT> l=new ArrayList<StackADT>();
         pila=new ArrayStack();
         lista=new DoubleIndexedList();
+        for(int i=0;i<4;i++){
+            lista.add(pila);
+        }
         sc = new Scanner(System.in);
     }
     
     public void iniciarJuego(){
         boolean falla=false;
         int resp=0;
-        secuenciaInicial();
+        //secuenciaInicial();
+        int turno=0;
         while(!falla){
-            resp=usuarioIntroduce();
-            falla=comprobarEntrada(resp);
             if(!falla){
-                nuevaSecuencia();
+                nuevaSecuencia(turno);
             }else{
                 System.out.println("¡Game over!");
             }
+            resp=usuarioIntroduce();
+            falla=comprobarEntrada(resp);
+            turno++;
         }
     }
     
@@ -54,17 +60,12 @@ public class Simon {
         muestraColor(color);
     }
     
-    private void nuevaSecuencia(){
-        pila.push(nuevoColor());
-        StackADT pAux=pila;
-        while(!pAux.isEmpty()){
-            lista.add(pAux.pop());
-        }
-        DoubleIterator it= (DoubleIterator)lista.iterator();
-        while(it.hasNext()){
-            int aux=(int)it.next();
-            muestraColor(aux);
-        }
+    private void nuevaSecuencia(int turno){
+        int color=nuevoColor();
+        StackADT aux=(StackADT)lista.get(color);
+        aux.push(turno);
+        lista.add(color, aux);
+        muestraSecuencia(turno);
     }
     
     private boolean comprobarEntrada(int color){
@@ -113,4 +114,28 @@ public class Simon {
         
         return resp;
     }
+    
+    private void muestraSecuencia(int turno){
+        DoubleIndexedList aux=lista;
+        while(turno>0){
+            int i=0;
+            boolean encontrado=false;
+            while(i < 4|| !encontrado) {
+                if(!((StackADT)aux.get(i)).isEmpty()){
+                    StackADT pilaAux=((StackADT)aux.get(i));
+                    if(!pilaAux.isEmpty()){
+                        if(turno==(int)pilaAux.peek()){
+                        muestraColor((int)pilaAux.pop());
+                        encontrado=true;
+
+                        }
+                    }
+                }
+                
+                i++;
+            }
+            turno--;   
+        }
+    }
+    
 }

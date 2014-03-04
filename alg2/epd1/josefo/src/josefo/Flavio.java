@@ -22,7 +22,7 @@ public class Flavio
 
 
 
-		n=15;
+		n=10;
 		k=3;
 		Cvector miVec = new Cvector(n); 
 
