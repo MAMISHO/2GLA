@@ -14,21 +14,19 @@ import stacks.*;
  * @author MAMISHO
  */
 public class Simon {
-    //creamos 2 tipos de modalidades,
-    //1- el modo normal
-    //2- nievl ingeniero, consiste en que el orden hay que hacerlo a la inversa.
-    //explicamos que es mejor hacerlo con colas, pero queremos complicarnos la vida y hacerlo con pilas
-    
-    private StackADT pila;
-    private DoubleIndexedList  lista;
+
+    private IndexedListADT<LinkedStack> colores;
+    private LinkedStack secuencia;
     Scanner sc;
     
     public Simon(){
-        ArrayList<StackADT> l=new ArrayList<StackADT>();
-        pila=new ArrayStack();
-        lista=new DoubleIndexedList();
+        colores=new DoubleIndexedList();
+        //ArrayList<StackADT> l=new ArrayList<StackADT>();
+        //pila=new ArrayStack();
+        secuencia=new LinkedStack();
+        LinkedStack pil=new LinkedStack();
         for(int i=0;i<4;i++){
-            lista.add(pila);
+            colores.add(pil);
         }
         sc = new Scanner(System.in);
     }
@@ -37,32 +35,23 @@ public class Simon {
         boolean falla=false;
         int resp=0;
         //secuenciaInicial();
-<<<<<<< HEAD
         int turno=0;
-=======
->>>>>>> FETCH_HEAD
-        while(!falla){
+        while(!falla && turno<10){
             if(!falla){
                 nuevaSecuencia(turno);
             }else{
                 System.out.println("¡Game over!");
             }
-<<<<<<< HEAD
-            resp=usuarioIntroduce();
-            falla=comprobarEntrada(resp);
+            System.out.println("nueva secuencia");
+            //resp=usuarioIntroduce();
+            resp=1;
+            //falla=comprobarEntrada(resp);
             turno++;
-=======
-            //usuario introduce y comprobar van en otro método en el que pregunta por la secuencia completa
-            resp=usuarioIntroduce();
-            falla=comprobarEntrada(resp);
-            //
-            
-            
->>>>>>> FETCH_HEAD
+            //usuario introduce y comprobar van en otro método en el que pregunta por la secuencia completa            
         }
     }
     
-    private void secuenciaInicial(){
+    /*private void secuenciaInicial(){
         int color=nuevoColor();
         pila.push(color);
         muestraColor(color);
@@ -70,17 +59,19 @@ public class Simon {
         color=nuevoColor();
         pila.push(color);
         muestraColor(color);
-    }
+    }*/
     
-<<<<<<< HEAD
     private void nuevaSecuencia(int turno){
         int color=nuevoColor();
-        StackADT aux=(StackADT)lista.get(color);
-        aux.push(turno);
-        lista.add(color, aux);
-        muestraSecuencia(turno);
-=======
-    private void nuevaSecuencia(){
+        secuencia.push(color);
+        System.out.println("tam de la secuencia: "+secuencia.size());
+        //System.out.println("Mete en la pila: "+color+" el elemento "+turno);
+        colores.get(color).push(turno);
+        //System.out.println("****Nueva Secuencia****");
+        muestraSecuencia();        
+    }
+    
+    /*private void nuevaSecuencia(){
         System.out.println("******* Secuencia ********");
         pila.push(nuevoColor());
         StackADT pAux=pila;
@@ -93,28 +84,14 @@ public class Simon {
             muestraColor(aux);
         }
         
-        /*duerme por un momento y limpiamos la pantalla
-        try{          
-            Thread.currentThread().sleep(3000);
-            //Runtime.getRuntime().exec("command clear");
-            for (int i = 0; i < 25; i++) {
-                System.out.println(" 1");
-            }
-          }
-          catch(Exception ie){
-          
-              System.out.println(ie);
-          }*/
-        
->>>>>>> FETCH_HEAD
-    }
+    }*/
     
     private boolean comprobarEntrada(int color){
         return false;//true si se equivoca else si esta bien
     }
     
     private int nuevoColor(){
-        int nuevoColor=(int) Math.floor(Math.random()*5+1);
+        int nuevoColor=(int) Math.floor(Math.random()*4+1);
         /*int ultimoColor=0;
         if(pila.size()>0){
             ultimoColor=(int)pila.pop();
@@ -157,26 +134,30 @@ public class Simon {
         return resp;
     }
     
-    private void muestraSecuencia(int turno){
-        DoubleIndexedList aux=lista;
-        while(turno>0){
-            int i=0;
-            boolean encontrado=false;
-            while(i < 4|| !encontrado) {
-                if(!((StackADT)aux.get(i)).isEmpty()){
-                    StackADT pilaAux=((StackADT)aux.get(i));
-                    if(!pilaAux.isEmpty()){
-                        if(turno==(int)pilaAux.peek()){
-                        muestraColor((int)pilaAux.pop());
-                        encontrado=true;
-
-                        }
-                    }
-                }
+    private void muestraSecuencia(){//turo me indica cuantos colores hay de moento en las pilas
+        /*IndexedListADT<LinkedStack> aux=new DoubleIndexedList();
+        aux=colores;
+        System.out.println("********Nueva Secuencia********");
+       for (int j = turno; j>0; j--) {
+            //System.out.println("DesAPila :"+j);
+            
+            for (int i = 0; i < aux.size()+1; i++) {
                 
-                i++;
+                
+                int c=(int)aux.get(i).peek();
+                //System.out.println(aux+" no es igual a "+j);
+                if(j==c){
+                    //System.out.println(aux.get(i).pop());
+                    //aux.get(i).pop();
+                    muestraColor(i);
+                }
+            
             }
-            turno--;   
+        }*/
+        //System.out.println("Nueva secuencia*****");
+        LinkedStack aux=secuencia;
+        while(aux.size()>0){
+            muestraColor((int)aux.pop());
         }
     }
     

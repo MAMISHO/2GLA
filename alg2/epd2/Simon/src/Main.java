@@ -16,8 +16,18 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Simon s=new Simon();
+        //Simon s=new Simon();
+        //s.iniciarJuego();
+        //Prueba p=new Prueba();
+        
+        SimonBueno s=new SimonBueno();
         s.iniciarJuego();
+        
+        /*String[] prueba={"holadfgred","asdfasdf"};
+        
+        for (int i = 0; i < prueba.length; i++) {
+            System.out.println(prueba[i]);
+        }*/
     }
     
 }
