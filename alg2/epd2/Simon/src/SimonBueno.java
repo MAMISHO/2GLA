@@ -24,7 +24,7 @@ public class SimonBueno {
         colores=new DoubleIndexedList();
         
         for(int i=0;i<4;i++){
-            System.out.println("Entre "+i+" su tam es "+colores.size());
+            //System.out.println("Entre "+i+" su tam es "+colores.size());
             
             LinkedStack pil=new LinkedStack();
             //System.out.println(colores.get(0).size());//el indice 0 no cuenta
@@ -37,7 +37,12 @@ public class SimonBueno {
     
     public void iniciarJuego(){
         boolean falla=false;
-        int resp=0;
+        System.out.println("Los colores son");
+        System.out.println("Amarillo \t--> 1");
+        System.out.println("Azul \t\t--> 2");
+        System.out.println("Rojo \t\t--> 3");
+        System.out.println("Verde \t\t--> 4");
+        //int cont=0;
         //secuenciaInicial();
         while(!falla){
             if(!falla){
@@ -45,33 +50,20 @@ public class SimonBueno {
             }else{
                 System.out.println("¡Game over!");
             }
-            //usuario introduce y comprobar van en otro método en el que pregunta por la secuencia completa
-            resp=usuarioIntroduce();
-            falla=comprobarEntrada(resp);
+
+                falla=comprobarEntrada();
+              //  cmp--;
+           // }
+            
             //
-            
-            
         }
     }
     
-    /*private void secuenciaInicial(){
-        int color=nuevoColor();
-        pila.push(color);
-        muestraColor(color);
-        
-        color=nuevoColor();
-        pila.push(color);
-        muestraColor(color);
-    }*/
-    
     private void nuevaSecuencia(){
-        System.out.println("******* Secuencia ********");
+        System.out.println("\n\n******* Inicia Secuencia ********\n");
         int color=nuevoColor();
         pila.push(color);
         colores.get(color).push(color);
-        System.out.println("el color es: "+color + "pila mide "+pila.size());
-        System.out.println("Lo que tiene en las posiciones");
-        System.out.println("->"+colores.get(color).peek()+"\n************\n");
         
         StackADT pAux=pila;
         while(!pAux.isEmpty()){
@@ -83,10 +75,50 @@ public class SimonBueno {
             int aux=(int)it.next();
             muestraColor(aux);
         }
-        
+        System.out.println("\n******* Fin Secuencia ********");
     }
     
-    private boolean comprobarEntrada(int color){
+    private boolean comprobarEntrada(){
+        
+        /*for (int j = 9; j>0; j--) {
+            System.out.println("DesAPila :"+j);
+            
+            for (int i = 0; i < colores.size()+1; i++) {
+                
+                int aux=(int)colores.get(i).peek();
+                //System.out.println(aux+" no es igual a "+j);
+                if(j==aux){
+                    System.out.println(colores.get(i).pop());
+                }
+            
+            }
+        }
+        IndexedListADT<LinkedStack> colAux=new DoubleIndexedList();
+        colAux=colores;
+        //while(colAux.size()>0){
+            for(int i=1;i<5;i++){
+                if(!colAux.get(i).isEmpty()){
+                    int a=(int)colAux.get(i).peek();
+                    if(a==color){
+                        colAux.get(i).pop();
+                        return false;
+                    }
+                }
+                
+                
+         //}
+            }*/
+            DoubleIterator it= (DoubleIterator)lista.iterator();
+            while(it.hasNext()){
+                int aux=(int)it.next();
+                int resp=usuarioIntroduce();
+                if(aux!=resp){
+                    System.out.println("¡Game over!");
+                    return true;
+                }
+                //muestraColor(aux);
+            }
+            System.out.println("Secuencia correcta");
         return false;//true si se equivoca else si esta bien
     }
     
@@ -115,7 +147,7 @@ public class SimonBueno {
     private int usuarioIntroduce(){
         int resp=0;
         do{
-            System.out.println("introduce el valor de la secuencia");
+            System.out.println("\nIntroduce el valor de la secuencia");
             resp=sc.nextInt();
             if(resp<1 || resp>4){
                 System.out.println("Color invalido");
