@@ -17,14 +17,17 @@ public class SimonBueno {
     
     private StackADT pila;
     private DoubleIndexedList  lista;
-    private IndexedListADT colores;
+    private IndexedListADT<LinkedStack> colores;
     Scanner sc;
     
     public SimonBueno(){
         colores=new DoubleIndexedList();
         
         for(int i=0;i<4;i++){
+            System.out.println("Entre "+i+" su tam es "+colores.size());
+            
             LinkedStack pil=new LinkedStack();
+            //System.out.println(colores.get(0).size());//el indice 0 no cuenta
             colores.add(pil);
         }
         pila=new ArrayStack();
@@ -51,7 +54,7 @@ public class SimonBueno {
         }
     }
     
-    private void secuenciaInicial(){
+    /*private void secuenciaInicial(){
         int color=nuevoColor();
         pila.push(color);
         muestraColor(color);
@@ -59,15 +62,22 @@ public class SimonBueno {
         color=nuevoColor();
         pila.push(color);
         muestraColor(color);
-    }
+    }*/
     
     private void nuevaSecuencia(){
         System.out.println("******* Secuencia ********");
-        pila.push(nuevoColor());
+        int color=nuevoColor();
+        pila.push(color);
+        colores.get(color).push(color);
+        System.out.println("el color es: "+color + "pila mide "+pila.size());
+        System.out.println("Lo que tiene en las posiciones");
+        System.out.println("->"+colores.get(color).peek()+"\n************\n");
+        
         StackADT pAux=pila;
         while(!pAux.isEmpty()){
             lista.add(pAux.pop());
         }
+        
         DoubleIterator it= (DoubleIterator)lista.iterator();
         while(it.hasNext()){
             int aux=(int)it.next();
@@ -81,7 +91,7 @@ public class SimonBueno {
     }
     
     private int nuevoColor(){
-        int nuevoColor=(int) Math.floor(Math.random()*5+1);
+        int nuevoColor=(int) Math.floor(Math.random()*4+1);
         return nuevoColor;
     }
     
