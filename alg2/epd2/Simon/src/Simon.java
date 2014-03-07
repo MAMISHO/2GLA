@@ -35,11 +35,8 @@ public class Simon {
         System.out.println("Verde \t\t--> 4");
 
         while(!falla){
-            if(!falla){
+            
                 nuevaSecuencia();
-            }else{
-                System.out.println("¡Game over!");
-            }
 
                 falla=comprobarEntrada();
         }

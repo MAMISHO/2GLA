@@ -53,7 +53,7 @@ public class Ferry {
                 }
 
             }
-            System.out.println("\nSeñal indice: " + pos);
+            //System.out.println("\nSeñal indice: " + pos);
             System.out.println("\nTamaño del ferri" + ferry.size());
             if (parking.get(pos).isEmpty()) {
                 pos++;
